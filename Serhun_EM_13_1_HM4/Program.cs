@@ -62,12 +62,12 @@ namespace Serhun_EM_13_1_HM4
         }
         static int H_OR_T(Random random) {
             int num = random.Next(1, 1001);
-            if (num < 496)
+            if (num < 498)
             {
                 Console.WriteLine("heads");
                 return 3;
             }
-            else if (num > 504)
+            else if (num > 502)
             {
                 Console.WriteLine("tails");
                 return 1;
@@ -258,7 +258,7 @@ namespace Serhun_EM_13_1_HM4
             try
             {
                 Random random = new Random();
-                int ComputerNumber = random.Next(1, 10);
+                int ComputerNumber = random.Next(1, 11);
                 for (int i = 0; i < 3; i++)
                 {
                     Console.Write("Enter your number (1-10): ");
