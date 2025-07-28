@@ -6,6 +6,11 @@ namespace Serhun_EM_13_1_HM4
 {
     internal class Program
     {
+        //Functions for most tasks
+        static void ErrorMessage(string message)
+        {
+            throw new Exception($"Error! {message}");
+        }
         static void vivodRazdeliteley(string razdelitel)
         {
             Console.WriteLine(string.Concat(Enumerable.Repeat(razdelitel, 23)));
@@ -51,7 +56,7 @@ namespace Serhun_EM_13_1_HM4
             string playerName = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(playerName))
             {
-                throw new Exception("Error! Player name cannot be empty.");
+                ErrorMessage("Player name cannot be empty.");
             }
             return playerName;
         }
@@ -109,7 +114,7 @@ namespace Serhun_EM_13_1_HM4
         {             
             if (UserNumber < 1 || UserNumber > 10)
             {
-                throw new Exception("Error! Number must be between 1 and 10.");
+                ErrorMessage("Number must be between 1 and 10.");
             }
             if (UserNumber > computerNumber)
             {
@@ -140,14 +145,14 @@ namespace Serhun_EM_13_1_HM4
 
         static int Attack(string NPCName, int NPCAtack, int NPCCrit, string NPC2Name, int NPC2HP, Random random)
         {
-            Console.WriteLine("NPC" + NPCName + " attack!");
+            Console.WriteLine(NPCName + " attack!");
             int crit = CritChance(NPCCrit, random);
             int damage = NPCAtack * crit;
             NPC2HP -= damage;
-            Console.WriteLine("NPC" + NPCName + " dealt " + damage + " HP damage");
+            Console.WriteLine(NPCName + " dealt " + damage + " HP damage");
             if (NPC2HP < 0)
                 NPC2HP = 0;
-            Console.WriteLine("NPC" + NPC2Name + " HP: " + NPC2HP);
+            Console.WriteLine(NPC2Name + " HP: " + NPC2HP);
             return NPC2HP;
         }
 
@@ -182,7 +187,7 @@ namespace Serhun_EM_13_1_HM4
         static void Main(string[] args)
         {
             // Task 1
-            /*
+            
             try
             {
                 List<string> opr = new List<string> { "+", "-", "*", "/", "^", "√", "%" };
@@ -196,22 +201,25 @@ namespace Serhun_EM_13_1_HM4
                     {
                         Console.Write("\", ");
                     }
+                    else
+                    {
+                        Console.Write("\"): ");
+                    }
                 }
-                Console.Write("\"): ");
                 int operation = Convert.ToInt32(Console.ReadLine()) - 1;
                 if (operation < 0 || operation > 7)
                 {
-                    throw new Exception("Error! Invalid operation selected. Please choose a valid operation.");
+                    ErrorMessage("Invalid operation selected. Please choose a valid operation.");
                 }
                 Console.Write("Enter the second number: ");
                 double num2 = Convert.ToDouble(Console.ReadLine());
                 if (operation == 3 && num2 == 0)
                 {
-                    throw new Exception("Error! Division by zero is not allowed.");
+                    ErrorMessage("Division by zero is not allowed.");
                 }
                 if ((operation == 5) && (num2 < 0) && (num1 % 2 == 0))
                 {
-                    throw new Exception("Error! Cannot extract the root of an even degree from a negative number.");
+                    ErrorMessage("Cannot extract the root of an even degree from a negative number.");
                 }
                 Result(num1, num2, opr[operation]);
             }
@@ -219,7 +227,7 @@ namespace Serhun_EM_13_1_HM4
             {
                 Console.WriteLine(ex.Message);
             }
-            */
+            
 
 
             // Task 2
@@ -271,24 +279,27 @@ namespace Serhun_EM_13_1_HM4
 
             // Task 4
             /*
-            Random random = new Random();
-            int NPC1HP = (int)NPC1.HP;
-            int NPC2HP = (int)NPC2.HP;
-            int i = 1;
-            while (NPC1HP > 0 && NPC2HP > 0)
             {
-                Console.WriteLine("Round " + i);
-                i++;
-                NPC2HP = Attack("1", (int)NPC1.ATTACK, (int)NPC1.CRITCHANCE, "2", NPC2HP, random);
-                if (NPC2HP <= 0){ 
+                Random random = new Random();
+                int NPC1HP = (int)NPC1.HP;
+                int NPC2HP = (int)NPC2.HP;
+                int i = 1;
+                while (NPC1HP > 0 && NPC2HP > 0)
+                {
+                    Console.WriteLine("Round " + i);
+                    i++;
+                    NPC2HP = Attack("NPC1", (int)NPC1.ATTACK, (int)NPC1.CRITCHANCE, "NPC2", NPC2HP, random);
+                    if (NPC2HP <= 0)
+                    {
+                        vivodRazdeliteley("=");
+                        break;
+                    }
+                    vivodRazdeliteley("-");
+                    NPC1HP = Attack("NPC2", (int)NPC2.ATTACK, (int)NPC2.CRITCHANCE, "NPC1", NPC1HP, random);
                     vivodRazdeliteley("=");
-                    break;
                 }
-                vivodRazdeliteley("-");
-                NPC1HP = Attack("2", (int)NPC2.ATTACK, (int)NPC2.CRITCHANCE, "1", NPC1HP, random);
-                vivodRazdeliteley("=");
+                Finish(NPC1HP, NPC2HP);
             }
-            Finish(NPC1HP, NPC2HP);
             */
         }
     }
